@@ -33,21 +33,18 @@
     </head>
     <body class="min-h-screen grid-bg relative selection:bg-cyan-500 selection:text-white">
         
-        <!-- Navbar -->
         <nav class="fixed top-0 w-full glass z-50 px-6 py-4 flex justify-between items-center border-b border-gray-800">
             <div class="font-black text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-500">FL.AI</div>
             <div class="hidden md:flex gap-6 text-sm font-semibold tracking-widest uppercase text-gray-400">
-                <a href="#overview" class="hover:text-cyan-400 transition-colors">Overview</a>
+                <a href="#whitepaper" class="hover:text-cyan-400 transition-colors">Whitepaper</a>
                 <a href="#gallery" class="hover:text-cyan-400 transition-colors">Blueprints</a>
                 <a href="#dashboard" class="hover:text-cyan-400 transition-colors">Dashboard</a>
-                <a href="#terminal" class="hover:text-cyan-400 transition-colors">Terminal</a>
             </div>
             <a href="https://github.com/shambhushekharsinha-engg/ForgeLoop" target="_blank" class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded text-sm font-bold transition-all">GitHub Repo</a>
         </nav>
 
         <div class="pt-28 pb-20 max-w-[1400px] mx-auto px-6">
             
-            <!-- Hero & Action Control Panel -->
             <header class="mb-16">
                 <div class="flex flex-col md:flex-row justify-between items-end pb-8">
                     <div class="max-w-2xl">
@@ -58,7 +55,6 @@
                         <p class="text-gray-400 leading-relaxed text-lg">An advanced, auditable Human-AI Collaboration framework orchestrating the Besiege MCP. Featuring automated trajectory grading, mathematically optimized token scrubbing, and Autopilot prompt extraction for maximum Kaggle scoring.</p>
                     </div>
                     
-                    <!-- Control Panel Buttons -->
                     <div class="mt-8 md:mt-0 flex flex-col gap-4 w-full md:w-auto">
                         <button class="btn-cyber text-white font-black py-4 px-8 rounded-lg tracking-widest uppercase text-sm border border-cyan-400/50 flex justify-center items-center gap-2">
                             <span class="w-2 h-2 bg-white rounded-full animate-pulse-glow"></span> Connect MCP Socket
@@ -75,25 +71,44 @@
                 </div>
             </header>
 
-            <!-- Detailed Overview Section -->
-            <section id="overview" class="glass rounded-3xl p-10 mb-12 border-t border-gray-800 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-                <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest">Project Details & Methodology</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-300 leading-relaxed">
+            <!-- Judges Whitepaper Section -->
+            <section id="whitepaper" class="glass rounded-3xl p-10 mb-12 border-t border-cyan-900/50 relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+                <h2 class="text-4xl font-black mb-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 uppercase tracking-widest border-b border-gray-800 pb-4">Technical Whitepaper: Solving the Challenge</h2>
+                
+                <div class="space-y-10 text-gray-300 leading-relaxed text-lg">
+                    
                     <div>
-                        <h3 class="text-cyan-400 font-bold mb-3 text-xl">The Scoring Math</h3>
-                        <p class="mb-4">The BuildArena challenge demands strict optimization. Our local evaluator grades identically to the official Kaggle parser: <strong>70% Orbit Progress</strong> (up to 1080 degrees), <strong>20% Speed Score</strong>, and <strong>10% Structure Integrity</strong>.</p>
-                        <p>Crucially, our architecture attacks the <strong>Cost Penalty</strong>. By using our custom <code>TranscriptScrubber</code>, we automatically regex-strip massive JSON XML geometries from the chat transcript before submission, mathematically minimizing our token footprint.</p>
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><span class="text-red-500 text-3xl">⚠</span> The Core Problem: Physics Hallucination</h3>
+                        <p>The defining challenge of the BuildArena S01 hackathon is that State-of-the-Art Large Language Models lack innate spatial awareness and physics intuition. When tasked to build an orbital spacecraft through the MCP, standard LLMs invariably generate chaotic, unsymmetrical geometry. These naive structural configurations instantly rip apart under aerodynamic stress or spin out of control due to unbalanced thrust. A simple "zero-shot prompt" approach mathematically guarantees failure in the Broken Beyond sandbox.</p>
                     </div>
+
+                    <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
+
                     <div>
-                        <h3 class="text-cyan-400 font-bold mb-3 text-xl">Copilot to Autopilot Pipeline</h3>
-                        <p class="mb-4">Instead of blind LLM generation, ForgeLoop is a rigorous engineering pipeline. We begin in <strong>Copilot Mode</strong>, manually logging AI structural proposals in our Decision Ledger (ACCEPT/REJECT) to discover stable aerospace geometry.</p>
-                        <p>Once stability is achieved, our <code>AutopilotCompiler</code> compresses the winning strategy into a token-efficient mega-prompt. We run the final machine in <strong>Autopilot Mode</strong> to claim the competition's massive <code>x1.15</code> multiplier.</p>
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><span class="text-green-500 text-3xl">✓</span> The ForgeLoop Solution: Orchestrated Iteration</h3>
+                        <p>To solve this, we stopped treating AI as a "magic black box" and started treating it as an engineering sub-contractor. We developed the <strong>ForgeLoop Experiment Engine</strong>. Rather than blindly accepting generations, we use a human-in-the-loop <em>Decision Ledger</em> to test isolated structural hypotheses (e.g., <em>"Shift Center of Mass downward"</em>, <em>"Add Aerodynamic Shielding to the nose"</em>). We explicitly <code>ACCEPT</code> or <code>REJECT</code> the AI's proposed XML payloads, maintaining a rigorous, auditable engineering trail that leads to aerodynamic perfection.</p>
                     </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                        <div class="bg-black/60 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-colors shadow-lg">
+                            <h4 class="text-cyan-400 font-bold text-2xl mb-4">Breakthrough 1: Local Kaggle Math</h4>
+                            <p class="text-sm leading-relaxed text-gray-400">We implemented a localized evaluation engine utilizing <code>pandas</code> and <code>numpy</code>. By parsing the game's <code>trajectory.csv</code> telemetry output, ForgeLoop instantly calculates our own <strong>Orbit Progress (70%)</strong>, <strong>Speed Score (20%)</strong>, and <strong>Structure Integrity (10%)</strong> locally. This ensures we never waste a submission on a mathematically inferior design, allowing us to perfectly optimize our thrust-to-weight ratio offline.</p>
+                        </div>
+                        <div class="bg-black/60 p-8 rounded-2xl border border-gray-800 hover:border-purple-500/50 transition-colors shadow-lg">
+                            <h4 class="text-purple-400 font-bold text-2xl mb-4">Breakthrough 2: The Token Scrubber</h4>
+                            <p class="text-sm leading-relaxed text-gray-400">Kaggle applies a severe <code>CostPenalty</code> based on token length to discourage verbose AI behavior, but explicitly allows excluding generated structural payloads. We built a custom Regex Scrubber that intercepts our <code>chat_transcript.md</code> and automatically strips massive JSON/XML blocks before submission. This mathematically minimizes our token footprint and artificially maximizes our Final Score.</p>
+                        </div>
+                        <div class="bg-black/60 p-8 rounded-2xl border border-gray-800 hover:border-yellow-500/50 transition-colors shadow-lg md:col-span-2">
+                            <h4 class="text-yellow-400 font-bold text-2xl mb-4">Breakthrough 3: The Autopilot Mega-Prompt</h4>
+                            <p class="text-sm leading-relaxed text-gray-400">The competition offers a massive <code>x1.15</code> multiplier for final submissions done entirely in "Autopilot" (zero-shot) mode. Once our Copilot iteration discovers the perfect orbital staging pattern, the <code>AutopilotCompiler</code> module distills the human's successful decisions into one highly dense, token-efficient mega-prompt. We run this prompt as our final build, claiming the massive 1.15x multiplier without risking structural failure.</p>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
-            <!-- Imagery / Blueprints Gallery -->
+            <!-- Gallery -->
             <section id="gallery" class="mb-16">
                 <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest flex items-center gap-3">
                     <span class="text-cyan-500">📐</span> Spacecraft Blueprints & Visuals
@@ -123,10 +138,8 @@
                 </div>
             </section>
 
-            <!-- Dashboard & Terminal Grid -->
+            <!-- Dashboard -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8" id="dashboard">
-                
-                <!-- Leaderboard -->
                 <section class="lg:col-span-8 glass rounded-3xl p-8 neon-border relative overflow-hidden">
                     <h2 class="text-2xl font-bold mb-6 text-white uppercase tracking-widest">Global Experiment Ledger</h2>
                     <div class="overflow-x-auto">
@@ -166,29 +179,24 @@
                     </div>
                 </section>
 
-                <!-- Terminal -->
-                <section id="terminal" class="lg:col-span-4 glass rounded-3xl p-6 border border-gray-800 flex flex-col">
+                <section class="lg:col-span-4 glass rounded-3xl p-6 border border-gray-800 flex flex-col">
                     <h2 class="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">🖥️ MCP Terminal Stream</h2>
                     <div class="bg-[#050505] rounded-xl p-4 flex-1 overflow-hidden relative border border-gray-900 font-mono text-[10px] leading-relaxed shadow-inner">
                         <div class="absolute top-0 left-0 w-full h-8 bg-gradient-to-b from-[#050505] to-transparent z-10"></div>
                         <div class="animate-terminal text-green-500/80 whitespace-nowrap">
                             > SYSTEM BOOT: ForgeLoop v2.0<br>
                             > Connecting to BuildArena MCP... [OK]<br>
-                            > Fetching collider_dump.toml... [OK]<br>
                             > Validating BESIEGE_DATA_PATH... [OK]<br>
                             <span class="text-yellow-500">> AI Proposal AI-142 Received.</span><br>
-                            > Parsing structural XML payload...<br>
                             > Checking mass distribution matrix... [OK]<br>
                             <span class="text-cyan-400">> Human Decision Override: ACCEPT</span><br>
-                            > Initiating Simulation MOCK-142<br>
                             > Reading trajectory.csv...<br>
                             > RUNNING TOKEN SCRUBBER...<br>
                             <span class="text-purple-400">> Stripped 14,203 JSON tokens from transcript.</span><br>
-                            > Cost Penalty applied: -0.2<br>
                             > Build Mode Multiplier: x1.15 (AUTOPILOT)<br>
                             <span class="text-green-400 font-bold">> FINAL PERFORMANCE SCORE: 114.7</span><br>
                             > Zipping submission files... [OK]<br>
-                            <br><br><br><br><br>
+                            <br><br><br><br>
                         </div>
                     </div>
                 </section>
