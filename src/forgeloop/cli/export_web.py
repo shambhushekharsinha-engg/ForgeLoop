@@ -64,7 +64,10 @@ def export_dashboard():
                         <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-600 drop-shadow-lg mb-4">
                             ForgeLoop<span class="text-cyan-500">.AI</span>
                         </h1>
-                        <p class="text-xl text-cyan-400 tracking-[0.2em] uppercase font-bold mb-6">BuildArena S01 Official Submission</p>
+                        <div class="flex items-center gap-4 mb-6">
+                            <p class="text-xl text-cyan-400 tracking-[0.2em] uppercase font-bold">BuildArena S01 Official Submission</p>
+                            <img src="https://github.com/shambhushekharsinha-engg/ForgeLoop/actions/workflows/ci.yml/badge.svg" alt="CI Status" class="rounded shadow-[0_0_10px_rgba(0,240,255,0.3)]">
+                        </div>
                         <p class="text-gray-400 leading-relaxed text-lg">An advanced, auditable Human-AI Collaboration framework orchestrating the Besiege MCP. Featuring automated trajectory grading, mathematically optimized token scrubbing, and Autopilot prompt extraction for maximum Kaggle scoring.</p>
                     </div>
                     

@@ -1,3 +1,4 @@
+[![ForgeLoop CI](https://github.com/shambhushekharsinha-engg/ForgeLoop/actions/workflows/ci.yml/badge.svg)](https://github.com/shambhushekharsinha-engg/ForgeLoop/actions)
 # ForgeLoop-AI 🚀
 
 **An advanced, auditable Human-AI Collaboration framework built to dominate the BuildArena Construction Challenge S01.**
