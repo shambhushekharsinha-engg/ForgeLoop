@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Machine version="1" name="ForgeLoop_Mock"><Blocks><Block id="0" guid="starting-block-123" /><Block id="18" guid="thruster-0" /><Block id="18" guid="thruster-1" /><Block id="18" guid="thruster-2" /><Block id="18" guid="thruster-3" /></Blocks></Machine>

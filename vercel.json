@@ -1,0 +1,5 @@
+{
+  "framework": null,
+  "buildCommand": "python src/forgeloop/cli/export_web.py",
+  "outputDirectory": "public"
+}
