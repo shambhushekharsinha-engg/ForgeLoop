@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forgeloop"
+version = "0.1.0"
+description = "Human-AI Collaboration Engineering Challenge solution"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "jupyter",
+    "pytest"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
