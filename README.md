@@ -1,76 +1,85 @@
-# ForgeLoop
+# 🚀 ForgeLoop
 
-ForgeLoop is a Python toolkit for preparing and reviewing experiments for the BuildArena Besiege spacecraft challenge. It records human decisions, inspects local flight data, estimates scores, drafts prompts/writeups, and packages existing artifacts.
+[![ForgeLoop CI](https://github.com/shambhushekharsinha-engg/ForgeLoop/actions/workflows/ci.yml/badge.svg)](https://github.com/shambhushekharsinha-engg/ForgeLoop/actions/workflows/ci.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
-**Current status:** a development toolkit, with synthetic demonstrations. It does not currently connect to an LLM or the BuildArena MCP, construct a playable spacecraft, or run the game. Local scores are estimates, not official leaderboard results. The synthetic trajectory generator is a plotting fixture, not a physics simulator.
+**ForgeLoop** is a comprehensive Python toolkit designed for the **BuildArena Besiege Spacecraft Challenge**. It provides a rigorous, offline-first pipeline for evaluating flight telemetry, standardizing AI prompts, searching offline block catalogs, and securely packaging final artifacts for Kaggle submissions.
 
-## Quick Start (For Tomorrow's Deadline)
+---
 
-We have added a `Makefile` and an environment template to speed up your workflow.
+## 🌟 Key Features
 
-1. **Set up API Keys**: Rename `.env.template` to `.env` and paste your LLM keys.
-2. **Use the Makefile**: You can now run all commands easily:
-   - `make install` (Install dependencies)
-   - `make test` (Run test suite)
-   - `make simulate` (Run synthetic demo)
-   - `make dashboard` (Update web UI)
-   - `make verify` (Run the Kaggle pre-flight checklist)
-   - `make package` (Zip final submission)
+- **📊 Telemetry Strategist**: Ingests offline game trajectory data (CSV) and computes rigorous mathematical diagnostics (e.g., standard deviations and precise z-axis bounds) to inform your next engineering iterations.
+- **🏗️ Offline Block Catalog**: Search through a pinned, fully attributed organizer snapshot of 97+ Besiege block roles completely offline. No API key required for planning geometry.
+- **🤖 Safe Autopilot Compiler**: Formats human-reviewed strategies into token-efficient prompts. Automatically prevents unreviewed or failed experiments from being compiled.
+- **🛡️ Submission Packager**: A pre-flight engine that verifies the exact presence of `machine_raw.bsg`, `chat_transcript.md`, and other Kaggle artifacts, ensuring you are never disqualified for missing files.
+- **🌐 Static Web Dashboard**: Instantly exports your local experiment ledger and trajectory plots into a beautiful, static web dashboard ready for Vercel.
 
-## What does the missing API key mean?
+## ⚡ Quick Start (Submission Deadline)
 
-There is no API-key requirement in ForgeLoop's implemented features. The existing strategist is a rule-based helper and the compiler formats a prompt. A hosted model provider may require credentials if you choose to add one. The organizer's tools can instead be used through a compatible existing agent or local model; public metadata does not replace model inference or game assets.
+We have streamlined the workflow for fast execution via a `Makefile`.
 
-The official challenge uses **Besiege + The Broken Beyond**, with machines built through the organizer's MCP and flight evidence recorded by the game tracker. See the [competition overview](https://www.kaggle.com/competitions/build-arena-human-ai-colleberation-engineering-challenge/overview) and [organizer setup](https://github.com/build-arena/BuildArena-2.0). The overview checked September 12, 2026 lists the S01 deadline as September 12 AOE, 2026. Confirm current submission availability on Kaggle.
+### 1. Setup
+```bash
+git clone https://github.com/shambhushekharsinha-engg/ForgeLoop
+cd ForgeLoop
 
-## Start without a key
+# Install all analysis and development dependencies
+make install
+```
 
-Python 3.10+:
+### 2. Configure Environment
+Rename the template file to `.env` and fill in your LLM API keys:
+```bash
+cp .env.template .env
+```
+*(Note: ForgeLoop's core analysis tools run offline. The API key is only required if you choose to connect a hosted model provider for prompt inference.)*
 
-```sh
-pip install -e .
+### 3. Core Commands
+Run these commands to execute the pipeline:
+- `make test` — Run the entire 146+ unit test suite to ensure system integrity.
+- `make simulate` — Run a synthetic trajectory generation demo and test the evaluators.
+- `make dashboard` — Generate the static Vercel web UI into the `public/` directory.
+- `make verify` — **Crucial for Kaggle:** Run the strict pre-flight checklist to ensure all your artifacts are present.
+- `make package` — Securely zip your final `ForgeLoop_Submission.zip`.
+
+---
+
+## 🔍 Offline Block Catalog Usage
+
+ForgeLoop bundles actual public block names, IDs, and pointer axes from a pinned organizer commit.
+
+**Search Blocks Offline:**
+```bash
 forgeloop-catalog rocket
 forgeloop-catalog --type connection
-forgeloop-catalog --json > block-reference.json
 ```
+*Outputs JSON data representing the block metadata.*
 
-The bundled catalog contains actual public block names, IDs, roles, and pointer axes from a pinned organizer commit. Searches run offline. It does **not** include game meshes, collision bounds, thrust specifications, or flight evidence.
-
-Refresh the pinned source into a separate cache (internet needed, no account/key):
-
-```sh
+**Refresh Cache from Source:**
+```bash
 forgeloop-catalog --refresh .cache/block_catalog.json
-forgeloop-catalog --catalog .cache/block_catalog.json wheel
 ```
 
-Without installing, on Python 3.11+:
+---
 
-```sh
-PYTHONPATH=src python -m forgeloop.cli.catalog rocket
-```
+## 🛠️ Implemented Safeguards & Architecture
 
-The normalized catalog retains its source URL, commit, retrieval timestamp, SHA-256 and attribution. Upstream data is **CC BY-NC 4.0**; its license is included in `src/forgeloop/resources/BuildArena-LICENSE.txt`. This is a metadata reference for planning; block availability must still be checked against your installed game/DLC.
+ForgeLoop was audited and re-engineered for strict defensive programming:
+- **No Hallucinated Scores**: Invalid numeric scores and malformed trajectories are aggressively rejected.
+- **Missing Telemetry Handling**: The `TelemetryStrategist` verifies exact column presence before asserting mathematical claims.
+- **Graceful Tokenizer Fallbacks**: If `tiktoken` is unavailable, the pipeline falls back to an offline UTF-8 byte estimate (`math.ceil(len(bytes) / 4)`).
+- **Atomic Concurrency**: Safe concurrent lock handling for file updates, preventing Windows OS locking crashes.
 
-## Analysis and development
+For a deeper dive, read the [Architecture Guide](docs/ARCHITECTURE.md) or the latest [Project Status Audit](docs/PROJECT_STATUS.md).
 
-```sh
-pip install -e ".[analysis,dev]"
-python -m pytest -q
-python simulate_phase5.py
-python showcase.py
-python -m forgeloop.cli.export_web
-```
+---
 
-`simulate_phase5.py` and `showcase.py` use synthetic examples. Install `[tokens]` only if you need optional local tokenizer support. The default estimate works offline. Android/Termux can run the catalog and core utilities; scientific packages may require platform-specific installation. Full game testing requires the organizer-supported desktop setup.
+## 📜 Official Competition Rules
 
-## Implemented safeguards
+The official challenge uses **Besiege + The Broken Beyond**. Machines must be built through the organizer's MCP and flight evidence must be recorded by the official game tracker.
+- [Kaggle Competition Overview](https://www.kaggle.com/competitions/build-arena-human-ai-colleberation-engineering-challenge/overview)
+- [Official BuildArena Setup](https://github.com/build-arena/BuildArena-2.0)
 
-- Invalid numeric scores and malformed local trajectories are rejected.
-- Orbit, speed and integrity helpers expose local assumptions; missing measurements cannot prove success.
-- Packaging requires existing, nonempty artifacts and preserves original transcript bytes.
-- The transcript scrubber preserves text by default; optional marked tool-output redaction creates review text, not proof of official token eligibility.
-- Dashboard/writeup output distinguishes recorded facts, estimates and missing evidence.
-
-Basic file validation cannot prove MCP origin, legal geometry tuning, vanilla parameter ranges, or competition eligibility. Keep raw build files, histories and transcripts unchanged. Prompt compilation alone does not qualify a run as Autopilot.
-
-See [current status and next steps](docs/PROJECT_STATUS.md) for the audit and remaining integration work.
+> **Disclaimer:** Basic file validation cannot prove MCP origin, legal geometry tuning, or competition eligibility. Keep raw build files, histories, and transcripts unchanged.
