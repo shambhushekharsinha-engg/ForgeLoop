@@ -4,6 +4,19 @@ ForgeLoop is a Python toolkit for preparing and reviewing experiments for the Bu
 
 **Current status:** a development toolkit, with synthetic demonstrations. It does not currently connect to an LLM or the BuildArena MCP, construct a playable spacecraft, or run the game. Local scores are estimates, not official leaderboard results. The synthetic trajectory generator is a plotting fixture, not a physics simulator.
 
+## Quick Start (For Tomorrow's Deadline)
+
+We have added a `Makefile` and an environment template to speed up your workflow.
+
+1. **Set up API Keys**: Rename `.env.template` to `.env` and paste your LLM keys.
+2. **Use the Makefile**: You can now run all commands easily:
+   - `make install` (Install dependencies)
+   - `make test` (Run test suite)
+   - `make simulate` (Run synthetic demo)
+   - `make dashboard` (Update web UI)
+   - `make verify` (Run the Kaggle pre-flight checklist)
+   - `make package` (Zip final submission)
+
 ## What does the missing API key mean?
 
 There is no API-key requirement in ForgeLoop's implemented features. The existing strategist is a rule-based helper and the compiler formats a prompt. A hosted model provider may require credentials if you choose to add one. The organizer's tools can instead be used through a compatible existing agent or local model; public metadata does not replace model inference or game assets.
