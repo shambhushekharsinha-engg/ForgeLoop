@@ -133,13 +133,50 @@ def export_dashboard(registry=None, output_dir="public", plots_dir="docs/plots")
             <!-- Mandatory Video Embed Section -->
             <section id="video" class="glass rounded-3xl p-10 mb-12 border-t border-purple-900/50 relative overflow-hidden shadow-2xl">
                 <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-                <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest flex items-center gap-3">
-                    <span class="text-purple-500">🎥 </span> Flight Demonstration
-                </h2>
-                <div class="aspect-video bg-black rounded-xl border border-gray-800 flex items-center justify-center p-2 shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Placeholder Flight Demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="rounded-lg"></iframe>
+                <header class="mb-16 border-b border-gray-800 pb-10">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="inline-block bg-purple-900/40 border border-purple-500/50 text-purple-300 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+                            BuildArena Spacecraft Challenge • S01 Kaggle Submission
+                        </div>
+                        <div class="text-gray-500 text-sm font-mono flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            SYSTEMS NOMINAL
+                        </div>
+                    </div>
+                    <h1 class="text-6xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 tracking-tighter">
+                        ForgeLoop <span class="font-light text-white">Telemetry</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 font-light max-w-2xl">
+                        Local experiment tracking and prompt compilation tools for the Human-AI collaboration challenge.
+                    </p>
+                </header>
+
+                <!-- Actions -->
+                <div class="flex gap-4 mb-16">
+                    <a href="#video" class="flex-1 text-center btn-alert text-white font-bold py-4 px-6 rounded-xl tracking-widest text-sm uppercase border border-cyan-500/50 hover:bg-cyan-900/30 transition-all shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+                        View Flight Recording
+                    </a>
+                    <a href="#gallery" class="flex-1 text-center btn-alert text-white font-bold py-4 px-6 rounded-xl tracking-widest text-sm uppercase border border-purple-500/50 hover:bg-purple-900/30 transition-all shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+                        View 3D Plots
+                    </a>
                 </div>
-                <p class="mt-5 text-gray-400 text-sm">Synthetic demonstration placeholder. Attach evidence from the actual in-game run before presenting flight results.</p>
+
+                <!-- Video Evidence -->
+                <section id="video" class="mb-16">
+                    <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest flex items-center gap-3">
+                        <span class="text-purple-500">>></span> Flight Evidence
+                    </h2>
+                    <div class="aspect-video bg-[#050505] rounded-xl border border-gray-800 flex flex-col items-center justify-center p-8 shadow-[0_0_30px_rgba(168,85,247,0.15)] relative overflow-hidden group">
+                        <!-- Video Placeholder UI -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-cyan-900/10"></div>
+                        <div class="text-cyan-500/50 mb-4 animate-pulse">
+                            <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-xl text-white font-bold tracking-widest relative z-10">VIDEO EVIDENCE PENDING</h3>
+                        <p class="text-gray-500 mt-2 text-sm relative z-10">Record your final screen recording tomorrow and upload it to YouTube.</p>
+                        <p class="text-gray-600 mt-1 text-xs relative z-10">Edit export_web.py to replace this block with your YouTube iframe.</p>
+                    </div>
+                </section>
             </section>
 
             <!-- Gallery -->

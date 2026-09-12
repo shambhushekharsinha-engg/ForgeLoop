@@ -26,7 +26,7 @@ verify:
 	python scripts/verify_submission.py
 
 package:
-	python -c "from forgeloop.cli.packager import SubmissionPackager; SubmissionPackager().package()"
+	python scripts/create_submission.py
 
 clean:
 	rm -rf .pytest_cache
