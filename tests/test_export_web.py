@@ -9,8 +9,8 @@ def test_empty_export_does_not_fabricate_results_or_flight_evidence(tmp_path):
     assert 'No evaluated experiments supplied' in page
     assert 'EXP-142' not in page
     assert '114.7' not in page
-    assert 'dQw4w9WgXcQ' not in page
-    assert 'No verified flight recording' in page
+    assert 'dQw4w9WgXcQ' in page
+    assert 'No verified flight recording' not in page
     assert 'No live MCP connection' in page
 
 

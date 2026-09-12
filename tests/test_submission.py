@@ -195,5 +195,10 @@ def test_symlink_artifact_rejected(artifacts, tmp_path):
     original = tmp_path / "original.bsg"
     original.write_bytes(contents["machine_raw.bsg"])
     (source / "machine_raw.bsg").unlink()
-    (source / "machine_raw.bsg").symlink_to(original)
+    try:
+        (source / "machine_raw.bsg").symlink_to(original)
+    except OSError as e:
+        if getattr(e, 'winerror', None) == 1314:
+            pytest.skip("Symlink creation requires privileges on Windows")
+        raise
     assert not SubmissionPackager(source, tmp_path / "submission.zip").package()

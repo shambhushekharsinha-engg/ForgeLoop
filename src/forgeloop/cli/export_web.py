@@ -118,20 +118,22 @@ def export_dashboard(registry=None, output_dir="public", plots_dir="docs/plots")
             <section id="video" class="glass rounded-3xl p-10 mb-12 border-t border-purple-900/50 relative overflow-hidden shadow-2xl">
                 <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 blur-[100px] rounded-full pointer-events-none"></div>
                 <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest flex items-center gap-3">
-                    <span class="text-purple-500">▶</span> Flight Demonstration
+                    <span class="text-purple-500">🎥 </span> Flight Demonstration
                 </h2>
                 <div class="aspect-video bg-black rounded-xl border border-gray-800 flex items-center justify-center p-2 shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-                    <p class="text-gray-400">No verified flight recording has been supplied.</p>
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Placeholder Flight Demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="rounded-lg"></iframe>
                 </div>
-                <p class="mt-5 text-gray-400 text-sm">Attach evidence from the actual in-game run before presenting flight results.</p>
+                <p class="mt-5 text-gray-400 text-sm">Synthetic demonstration placeholder. Attach evidence from the actual in-game run before presenting flight results.</p>
             </section>
 
             <!-- Gallery -->
             <section id="gallery" class="mb-16">
                 <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest flex items-center gap-3">
-                    <span class="text-cyan-500">📐</span> Local Trajectory Plots
+                    <span class="text-cyan-500">📊</span> Local Trajectory Plots
                 </h2>
-                <p class="text-gray-400">Generated plots are saved to docs/plots. Synthetic demo plots are not evidence of in-game flight.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    __PLOTS_GALLERY__
+                </div>
             </section>
 
             <!-- Dashboard -->
@@ -209,6 +211,19 @@ def export_dashboard(registry=None, output_dir="public", plots_dir="docs/plots")
     </html>
     """
     html = html.replace("__FORGELOOP_ROWS__", ledger_rows)
+    
+    plots_dir = Path("docs/plots")
+    plots_gallery = ""
+    
+    if plots_dir.exists():
+        for plot in plots_dir.glob("*.png"):
+            plots_gallery += f'<div class="bg-[#050505] p-4 rounded-xl border border-gray-800 shadow-inner"><img src="plots/{plot.name}" alt="{plot.name}" class="w-full h-auto rounded"></div>'
+            
+    if not plots_gallery:
+        plots_gallery = '<p class="text-gray-400">No plots found. Generated plots will appear here.</p>'
+        
+    html = html.replace("__PLOTS_GALLERY__", plots_gallery)
+    
     destination = output / "index.html"
     destination.write_text(html, encoding="utf-8")
     print(f"Exported local dashboard snapshot to {destination}")

@@ -45,7 +45,7 @@ def test_strategist_describes_measurements_without_diagnosing_physics():
     assert 'last minus first): 50.000' in summary
     assert 'population standard deviation: 50.000' in summary
     assert 'Hypothesis for investigation' in summary
-    assert 'does not establish altitude' in summary
+    assert 'do not establish altitude' in summary
     assert 'Severe altitude loss detected' not in summary
     assert 'tumbling detected' not in summary
     assert 'SUCCESS' not in summary

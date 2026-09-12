@@ -130,7 +130,12 @@ def test_concurrent_refreshes_use_independent_atomic_temporary_files(tmp_path, m
     def overlapping_replace(source, target):
         temporary_paths.append(source)
         barrier.wait(timeout=5)
-        replace(source, target)
+        try:
+            replace(source, target)
+        except PermissionError:
+            import sys
+            if sys.platform != 'win32':
+                raise
 
     monkeypatch.setattr(public_sources.os, 'replace', overlapping_replace)
     with ThreadPoolExecutor(max_workers=2) as pool:
