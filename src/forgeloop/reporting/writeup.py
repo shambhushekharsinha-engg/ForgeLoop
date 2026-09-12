@@ -10,8 +10,12 @@ class WriteupGenerator:
 
     def generate(self, machine_name: str, best_exp: Experiment, megaprompt: str):
         """Write an evidence-based draft; unknown run details remain explicit."""
-        score = best_exp.result.performance_score if best_exp.result else "Not evaluated"
-        fence = "`" * max(3, max((len(part) for part in re.findall(r"`+", megaprompt)), default=0) + 1)
+        score = (
+            best_exp.result.performance_score if best_exp.result else "Not evaluated"
+        )
+        fence = "`" * max(
+            3, max((len(part) for part in re.findall(r"`+", megaprompt)), default=0) + 1
+        )
         template = f"""# {machine_name}
 
 ## Track
@@ -23,7 +27,7 @@ class WriteupGenerator:
 - Experiment: {best_exp.id}
 - Hypothesis: {best_exp.hypothesis}
 - Local estimated performance score: {score}
-- Notes: {best_exp.notes or 'No run evidence recorded.'}
+- Notes: {best_exp.notes or "No run evidence recorded."}
 
 Local scores and synthetic telemetry do not establish in-game flight performance.
 Attach real flight evidence before making stability or orbit claims.

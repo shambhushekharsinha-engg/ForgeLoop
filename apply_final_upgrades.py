@@ -1,5 +1,3 @@
-import os
-
 # 1. cli/packager.py
 packager_code = '''import zipfile
 import shutil
@@ -43,7 +41,7 @@ class SubmissionPackager:
         return True
 '''
 
-with open('src/forgeloop/cli/packager.py', 'w', encoding='utf-8') as f:
+with open("src/forgeloop/cli/packager.py", "w", encoding="utf-8") as f:
     f.write(packager_code)
 
 # 2. reporting/writeup.py
@@ -95,5 +93,5 @@ The ForgeLoop architecture mathematically minimized our Cost Penalty by using an
         print(f"[SUCCESS] Kaggle Writeup generated at {self.output_path}")
 '''
 
-with open('src/forgeloop/reporting/writeup.py', 'w', encoding='utf-8') as f:
+with open("src/forgeloop/reporting/writeup.py", "w", encoding="utf-8") as f:
     f.write(writeup_code)

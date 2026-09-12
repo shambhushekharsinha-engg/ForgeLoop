@@ -1,6 +1,7 @@
-from html import escape
 import shutil
+from html import escape
 from pathlib import Path
+
 
 def export_dashboard(registry=None, output_dir="public", plots_dir="docs/plots"):
     """Export supplied local results; no API connection or fabricated scores."""
@@ -10,19 +11,34 @@ def export_dashboard(registry=None, output_dir="public", plots_dir="docs/plots")
         target = output / "plots" / plot.name
         if plot.resolve() != target.resolve():
             shutil.copy(plot, target)
-    experiments = [] if registry is None else [
-        exp for exp in registry.experiments.values() if exp.result is not None
-    ]
+    experiments = (
+        []
+        if registry is None
+        else [exp for exp in registry.experiments.values() if exp.result is not None]
+    )
     experiments.sort(key=lambda exp: exp.result.final_score, reverse=True)
     rows = []
     for rank, exp in enumerate(experiments, 1):
-        cells = [f"#{rank}", exp.id, exp.hypothesis, exp.build_mode,
-                 f"{exp.result.orbit_progress * 100:.1f}%",
-                 f"{exp.result.cost_penalty:.2f}", f"{exp.result.final_score:.2f}"]
-        rows.append('<tr>' + ''.join(
-            f'<td class="py-4 px-2">{escape(str(cell))}</td>' for cell in cells
-        ) + '</tr>')
-    ledger_rows = ''.join(rows) or '<tr><td colspan="7" class="py-4 px-2">No evaluated experiments supplied.</td></tr>'
+        cells = [
+            f"#{rank}",
+            exp.id,
+            exp.hypothesis,
+            exp.build_mode,
+            f"{exp.result.orbit_progress * 100:.1f}%",
+            f"{exp.result.cost_penalty:.2f}",
+            f"{exp.result.final_score:.2f}",
+        ]
+        rows.append(
+            "<tr>"
+            + "".join(
+                f'<td class="py-4 px-2">{escape(str(cell))}</td>' for cell in cells
+            )
+            + "</tr>"
+        )
+    ledger_rows = (
+        "".join(rows)
+        or '<tr><td colspan="7" class="py-4 px-2">No evaluated experiments supplied.</td></tr>'
+    )
 
     html = """
     <!DOCTYPE html>
@@ -211,23 +227,24 @@ def export_dashboard(registry=None, output_dir="public", plots_dir="docs/plots")
     </html>
     """
     html = html.replace("__FORGELOOP_ROWS__", ledger_rows)
-    
+
     plots_dir = Path("docs/plots")
     plots_gallery = ""
-    
+
     if plots_dir.exists():
         for plot in plots_dir.glob("*.png"):
             plots_gallery += f'<div class="bg-[#050505] p-4 rounded-xl border border-gray-800 shadow-inner"><img src="plots/{plot.name}" alt="{plot.name}" class="w-full h-auto rounded"></div>'
-            
+
     if not plots_gallery:
         plots_gallery = '<p class="text-gray-400">No plots found. Generated plots will appear here.</p>'
-        
+
     html = html.replace("__PLOTS_GALLERY__", plots_gallery)
-    
+
     destination = output / "index.html"
     destination.write_text(html, encoding="utf-8")
     print(f"Exported local dashboard snapshot to {destination}")
     return destination
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     export_dashboard()

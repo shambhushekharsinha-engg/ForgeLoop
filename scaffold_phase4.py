@@ -1,20 +1,20 @@
 import os
 
 # Ensure directories exist
-os.makedirs('src/forgeloop/decisions', exist_ok=True)
-os.makedirs('src/forgeloop/experiments', exist_ok=True)
+os.makedirs("src/forgeloop/decisions", exist_ok=True)
+os.makedirs("src/forgeloop/experiments", exist_ok=True)
 
 decisions_files = {
-    '__init__.py': '',
-    'proposal.py': '''from dataclasses import dataclass
+    "__init__.py": "",
+    "proposal.py": """from dataclasses import dataclass
 
 @dataclass
 class AIProposal:
     id: str
     strategy: str
     expected_benefit: str
-''',
-    'decision.py': '''from enum import Enum
+""",
+    "decision.py": """from enum import Enum
 from dataclasses import dataclass
 
 class DecisionStatus(Enum):
@@ -27,8 +27,8 @@ class HumanDecision:
     status: DecisionStatus
     reason: str
     modified_strategy: str = None
-''',
-    'ledger.py': '''import json
+""",
+    "ledger.py": """import json
 from pathlib import Path
 from .proposal import AIProposal
 from .decision import HumanDecision
@@ -40,12 +40,12 @@ class DecisionLedger:
     def log_decision(self, exp_id: str, problem: str, proposal: AIProposal, decision: HumanDecision):
         # Implementation to append to markdown log
         pass
-'''
+""",
 }
 
 experiments_files = {
-    '__init__.py': '',
-    'result.py': '''from dataclasses import dataclass
+    "__init__.py": "",
+    "result.py": """from dataclasses import dataclass
 
 @dataclass
 class ExperimentResult:
@@ -55,8 +55,8 @@ class ExperimentResult:
     performance_score: float
     cost_penalty: float
     final_score: float
-''',
-    'experiment.py': '''from dataclasses import dataclass
+""",
+    "experiment.py": """from dataclasses import dataclass
 from typing import Optional
 from ..decisions.proposal import AIProposal
 from ..decisions.decision import HumanDecision
@@ -76,8 +76,8 @@ class Experiment:
     trajectory: Optional[Trajectory] = None
     result: Optional[ExperimentResult] = None
     notes: str = ""
-''',
-    'registry.py': '''class ExperimentRegistry:
+""",
+    "registry.py": """class ExperimentRegistry:
     def __init__(self):
         self.experiments = {}
     
@@ -86,8 +86,8 @@ class Experiment:
         
     def get_next_id(self):
         return f"EXP-{len(self.experiments) + 1:03d}"
-''',
-    'runner.py': '''from .experiment import Experiment
+""",
+    "runner.py": """from .experiment import Experiment
 from ..evaluation.performance import calculate_performance_score
 from ..evaluation.final_score import calculate_final_score
 from ..evaluation.cost import estimate_token_cost
@@ -108,7 +108,7 @@ class ExperimentRunner:
             final_score=final
         )
         return exp.result
-'''
+""",
 }
 
 for fname, content in decisions_files.items():
@@ -120,9 +120,9 @@ for fname, content in experiments_files.items():
         f.write(content)
 
 # Update evaluation stub for the synthetic run
-eval_cost_stub = '''def estimate_token_cost(transcript_text: str) -> float:
+eval_cost_stub = """def estimate_token_cost(transcript_text: str) -> float:
     # Stub: returns length / 100 as dummy token cost for phase 5 validation
     return len(transcript_text) / 100.0
-'''
+"""
 with open("src/forgeloop/evaluation/cost.py", "w", encoding="utf-8") as f:
     f.write(eval_cost_stub)

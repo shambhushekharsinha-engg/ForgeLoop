@@ -1,7 +1,8 @@
 import math
 
-from ..experiments.experiment import Experiment
 from ..decisions.decision import DecisionStatus
+from ..experiments.experiment import Experiment
+
 
 class AutopilotCompiler:
     def compile_megaprompt(self, successful_experiment: Experiment) -> str:
@@ -15,11 +16,16 @@ class AutopilotCompiler:
         result = successful_experiment.result
         if result is None or not math.isfinite(result.final_score):
             raise ValueError("An evaluated experiment with a finite result is required")
-        strategy = (decision.modified_strategy if decision.status == DecisionStatus.MODIFY
-                    else successful_experiment.proposal.strategy)
+        strategy = (
+            decision.modified_strategy
+            if decision.status == DecisionStatus.MODIFY
+            else successful_experiment.proposal.strategy
+        )
         if not isinstance(strategy, str) or not strategy.strip():
-            raise ValueError("An approved strategy is required; MODIFY needs modified_strategy")
-        
+            raise ValueError(
+                "An approved strategy is required; MODIFY needs modified_strategy"
+            )
+
         mega_prompt = f"""[SYSTEM]
 ROLE: Expert Aerospace AI (BuildArena S01)
 OBJECTIVE: Construct a Besiege machine for stable orbital flight.

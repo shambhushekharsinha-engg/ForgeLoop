@@ -1,5 +1,5 @@
-from pathlib import Path
 import re
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -14,7 +14,9 @@ class TrajectoryPlotter:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-    def plot_orbit(self, experiment_id: str, trajectory_data: pd.DataFrame, *, center=None):
+    def plot_orbit(
+        self, experiment_id: str, trajectory_data: pd.DataFrame, *, center=None
+    ):
         """Plot measured x/y/z; mark an orbital center only if explicitly supplied."""
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", experiment_id):
             raise ValueError("Experiment ID must be a plain filename component")
@@ -24,8 +26,12 @@ class TrajectoryPlotter:
             raise ValueError("Trajectory columns must be unique")
         missing = {"x", "y", "z"}.difference(trajectory_data.columns)
         if missing:
-            raise ValueError(f"Trajectory coordinates missing: {', '.join(sorted(missing))}")
-        coordinates = trajectory_data[["x", "y", "z"]].apply(pd.to_numeric, errors="raise")
+            raise ValueError(
+                f"Trajectory coordinates missing: {', '.join(sorted(missing))}"
+            )
+        coordinates = trajectory_data[["x", "y", "z"]].apply(
+            pd.to_numeric, errors="raise"
+        )
         if not np.isfinite(coordinates.to_numpy(dtype=float)).all():
             raise ValueError("Trajectory coordinates must be finite")
         if center is not None:
@@ -37,10 +43,16 @@ class TrajectoryPlotter:
         FigureCanvasAgg(fig)
         try:
             ax = fig.add_subplot(111, projection="3d")
-            ax.plot(*(coordinates[column] for column in ("x", "y", "z")),
-                    label=f"Flight path ({experiment_id})", color="teal", linewidth=2)
+            ax.plot(
+                *(coordinates[column] for column in ("x", "y", "z")),
+                label=f"Flight path ({experiment_id})",
+                color="teal",
+                linewidth=2,
+            )
             if center is not None:
-                ax.scatter(*center, color="orange", s=100, label="Supplied orbital center")
+                ax.scatter(
+                    *center, color="orange", s=100, label="Supplied orbital center"
+                )
             ax.set_xlabel("X coordinate")
             ax.set_ylabel("Y coordinate")
             ax.set_zlabel("Z coordinate")

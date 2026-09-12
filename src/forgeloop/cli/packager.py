@@ -6,12 +6,12 @@ import io
 import json
 import math
 import os
-import stat
 import shutil
-from pathlib import Path
+import stat
 import tempfile
 import xml.etree.ElementTree as ET
 import zipfile
+from pathlib import Path
 
 from ..data.validators import validate_bsg_structure
 
@@ -45,7 +45,12 @@ def _publish_without_overwrite(temporary, output):
             os.link(temporary, output)
             return
         except OSError as exc:
-            if exc.errno not in (errno.ENOSYS, errno.EOPNOTSUPP, errno.EPERM, errno.EXDEV):
+            if exc.errno not in (
+                errno.ENOSYS,
+                errno.EOPNOTSUPP,
+                errno.EPERM,
+                errno.EXDEV,
+            ):
                 raise
     with output.open("xb") as target:
         try:
@@ -58,18 +63,24 @@ def _publish_without_overwrite(temporary, output):
 
 class SubmissionPackager:
     # Repository artifact convention; confirm current competition requirements.
-    REQUIRED_FILES = [
+    REQUIRED_FILES = (
         "machine_raw.bsg",
         "build_history.json",
         "build_history_full.json",
         "machine_tuned.bsg",
         "trajectory.csv",
         "chat_transcript.md",
-    ]
+    )
 
-    def __init__(self, source_dir="submissions/latest", output_name="ForgeLoop_Submission.zip",
-                 *, overwrite=False, max_artifact_bytes=64 * 1024 * 1024,
-                 max_total_bytes=128 * 1024 * 1024):
+    def __init__(
+        self,
+        source_dir="submissions/latest",
+        output_name="ForgeLoop_Submission.zip",
+        *,
+        overwrite=False,
+        max_artifact_bytes=64 * 1024 * 1024,
+        max_total_bytes=128 * 1024 * 1024,
+    ):
         self.source_dir = Path(source_dir)
         self.output_name = output_name
         self.overwrite = overwrite
@@ -81,7 +92,9 @@ class SubmissionPackager:
 
     def _read_bounded(self, path, remaining):
         # O_NOFOLLOW and fstat close the symlink/check-then-read race on Linux.
-        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+        flags = (
+            os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+        )
         with os.fdopen(os.open(path, flags), "rb") as handle:
             info = os.fstat(handle.fileno())
             if not stat.S_ISREG(info.st_mode):
@@ -106,11 +119,16 @@ class SubmissionPackager:
             if not content.strip():
                 raise ValueError(f"Empty artifact: {name}")
             if name.endswith(".json"):
-                data = json.loads(content, parse_float=_finite_json_float,
-                                  parse_constant=_reject_json_constant,
-                                  object_pairs_hook=_unique_json_object)
+                data = json.loads(
+                    content,
+                    parse_float=_finite_json_float,
+                    parse_constant=_reject_json_constant,
+                    object_pairs_hook=_unique_json_object,
+                )
                 if not isinstance(data, (dict, list)) or not data:
-                    raise ValueError(f"History must be a nonempty JSON object or array: {name}")
+                    raise ValueError(
+                        f"History must be a nonempty JSON object or array: {name}"
+                    )
             elif name.endswith(".bsg"):
                 validate_bsg_structure(content)
             elif name.endswith(".csv"):
@@ -119,8 +137,12 @@ class SubmissionPackager:
                 if len(header) < 2:
                     raise ValueError("Trajectory requires at least two columns")
                 normalized = [field.strip() for field in header]
-                if any(not field for field in normalized) or len(set(normalized)) != len(header):
-                    raise ValueError("Trajectory column names must be nonempty and unique")
+                if any(not field for field in normalized) or len(
+                    set(normalized)
+                ) != len(header):
+                    raise ValueError(
+                        "Trajectory column names must be nonempty and unique"
+                    )
                 row_count = 0
                 for row in rows:
                     row_count += 1
@@ -157,12 +179,19 @@ class SubmissionPackager:
         temporary = None
         try:
             output = Path(self.output_name)
-            if any(output.resolve() == (self.source_dir / name).resolve() for name in self.REQUIRED_FILES):
+            if any(
+                output.resolve() == (self.source_dir / name).resolve()
+                for name in self.REQUIRED_FILES
+            ):
                 raise ValueError("Archive output cannot overwrite a source artifact")
             if not self.overwrite and (output.exists() or output.is_symlink()):
-                raise ValueError("Archive already exists; choose a new path or set overwrite=True")
+                raise ValueError(
+                    "Archive already exists; choose a new path or set overwrite=True"
+                )
             artifacts = self._read_artifacts()
-            with tempfile.NamedTemporaryFile(dir=output.parent, suffix=".zip", delete=False) as handle:
+            with tempfile.NamedTemporaryFile(
+                dir=output.parent, suffix=".zip", delete=False
+            ) as handle:
                 temporary = Path(handle.name)
             with zipfile.ZipFile(temporary, "w", zipfile.ZIP_DEFLATED) as archive:
                 for name, content in artifacts.items():
@@ -177,5 +206,7 @@ class SubmissionPackager:
         finally:
             if temporary is not None:
                 temporary.unlink(missing_ok=True)
-        print(f"[SUCCESS] Packaged {len(artifacts)} artifacts into {self.output_name}; basic format checks only.")
+        print(
+            f"[SUCCESS] Packaged {len(artifacts)} artifacts into {self.output_name}; basic format checks only."
+        )
         return True

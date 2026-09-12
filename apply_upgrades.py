@@ -1,11 +1,7 @@
 import os
 
 # 1. Create Directories
-dirs = [
-    'src/forgeloop/reporting',
-    'src/forgeloop/cli',
-    'src/forgeloop/agents'
-]
+dirs = ["src/forgeloop/reporting", "src/forgeloop/cli", "src/forgeloop/agents"]
 for d in dirs:
     os.makedirs(d, exist_ok=True)
 
@@ -47,11 +43,11 @@ class TrajectoryPlotter:
         plt.close()
         return output_path
 '''
-with open('src/forgeloop/reporting/plotter.py', 'w', encoding='utf-8') as f:
+with open("src/forgeloop/reporting/plotter.py", "w", encoding="utf-8") as f:
     f.write(plotter_code)
 
 # 3. cli/dashboard.py
-dashboard_code = '''from rich.console import Console
+dashboard_code = """from rich.console import Console
 from rich.table import Table
 from ..experiments.registry import ExperimentRegistry
 
@@ -89,8 +85,8 @@ class LeaderboardCLI:
             )
             
         self.console.print(table)
-'''
-with open('src/forgeloop/cli/dashboard.py', 'w', encoding='utf-8') as f:
+"""
+with open("src/forgeloop/cli/dashboard.py", "w", encoding="utf-8") as f:
     f.write(dashboard_code)
 
 # 4. agents/compiler.py
@@ -117,7 +113,7 @@ EXECUTION:
 """
         return mega_prompt
 '''
-with open('src/forgeloop/agents/compiler.py', 'w', encoding='utf-8') as f:
+with open("src/forgeloop/agents/compiler.py", "w", encoding="utf-8") as f:
     f.write(compiler_code)
 
 # 5. THE SECRET WEAPON: agents/scrubber.py
@@ -142,7 +138,7 @@ class TranscriptScrubber:
         scrubbed = " ".join(scrubbed.split())
         return scrubbed
 '''
-with open('src/forgeloop/agents/scrubber.py', 'w', encoding='utf-8') as f:
+with open("src/forgeloop/agents/scrubber.py", "w", encoding="utf-8") as f:
     f.write(scrubber_code)
 
 # Add __init__.py files

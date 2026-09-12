@@ -17,15 +17,19 @@ class TokenAnalyzer:
             try:
                 import tiktoken
             except ImportError as exc:
-                raise RuntimeError("Install tiktoken to request an explicit encoding") from exc
+                raise RuntimeError(
+                    "Install tiktoken to request an explicit encoding"
+                ) from exc
             self.encoding = tiktoken.get_encoding(model)
 
     def calculate_penalty(self, transcript_text: str) -> dict:
         if self.encoding is None:
-            token_count = math.ceil(len(transcript_text.encode('utf-8')) / 4)
+            token_count = math.ceil(len(transcript_text.encode("utf-8")) / 4)
             method = "utf8_bytes_divided_by_4_estimate"
         else:
-            token_count = len(self.encoding.encode(transcript_text, disallowed_special=()))
+            token_count = len(
+                self.encoding.encode(transcript_text, disallowed_special=())
+            )
             method = "tiktoken"
         return {
             "tokens": token_count,

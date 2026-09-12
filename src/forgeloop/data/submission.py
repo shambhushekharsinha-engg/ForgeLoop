@@ -1,8 +1,10 @@
 from dataclasses import dataclass
+
+from .history import BuildHistory
 from .machine import BSGMachine
 from .trajectory import Trajectory
-from .history import BuildHistory
 from .transcript import ChatTranscript
+
 
 @dataclass
 class SubmissionPackage:

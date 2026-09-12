@@ -12,7 +12,7 @@ class TelemetryStrategist:
         if trajectory_df.empty:
             return "[STRATEGIST] No telemetry data available."
 
-        required = ('z', 'angular_progress', 'vz')
+        required = ("z", "angular_progress", "vz")
         missing = [field for field in required if field not in trajectory_df.columns]
         if missing:
             return f"[STRATEGIST] Missing telemetry fields: {', '.join(missing)}."
@@ -30,19 +30,19 @@ class TelemetryStrategist:
         mean_vz = sum(vz) / len(vz)
         spread_vz = math.sqrt(sum((value - mean_vz) ** 2 for value in vz) / len(vz))
         lines = [
-            '[STRATEGIST OBSERVATIONS]',
-            f'Samples: {len(z)}.',
-            f'Z coordinate: min {min(z):.3f}, max {max(z):.3f}, final {z[-1]:.3f}.',
-            f'Angular progress change (last minus first): {angles[-1] - angles[0]:.3f}.',
-            f'Vz population standard deviation: {spread_vz:.3f} (recorded units).',
-            'Coordinate frame and angular units must be confirmed before interpreting these measurements.',
-            'These measurements alone do not establish altitude, tumbling, orbital insertion, or stability.',
+            "[STRATEGIST OBSERVATIONS]",
+            f"Samples: {len(z)}.",
+            f"Z coordinate: min {min(z):.3f}, max {max(z):.3f}, final {z[-1]:.3f}.",
+            f"Angular progress change (last minus first): {angles[-1] - angles[0]:.3f}.",
+            f"Vz population standard deviation: {spread_vz:.3f} (recorded units).",
+            "Coordinate frame and angular units must be confirmed before interpreting these measurements.",
+            "These measurements alone do not establish altitude, tumbling, orbital insertion, or stability.",
         ]
         if len(z) < 2:
-            lines.append('Only one sample: flight trends cannot be assessed.')
+            lines.append("Only one sample: flight trends cannot be assessed.")
         else:
             lines.append(
-                'Hypothesis for investigation: compare changes in position and velocity with '
-                'control inputs and orientation telemetry before changing propulsion or mass distribution.'
+                "Hypothesis for investigation: compare changes in position and velocity with "
+                "control inputs and orientation telemetry before changing propulsion or mass distribution."
             )
-        return '\n'.join(lines)
+        return "\n".join(lines)

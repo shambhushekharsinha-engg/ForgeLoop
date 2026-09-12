@@ -1,5 +1,3 @@
-import os
-
 # 1. The Precision Token Analyzer
 tokenizer_code = '''import tiktoken
 
@@ -21,7 +19,7 @@ class TokenAnalyzer:
             "cost_penalty": round(penalty, 4)
         }
 '''
-with open('src/forgeloop/evaluation/tokenizer.py', 'w', encoding='utf-8') as f:
+with open("src/forgeloop/evaluation/tokenizer.py", "w", encoding="utf-8") as f:
     f.write(tokenizer_code)
 
 # 2. The AI Telemetry Strategist
@@ -63,16 +61,16 @@ class TelemetryStrategist:
             
         return "\\n".join(recommendations)
 '''
-with open('src/forgeloop/agents/strategist.py', 'w', encoding='utf-8') as f:
+with open("src/forgeloop/agents/strategist.py", "w", encoding="utf-8") as f:
     f.write(strategist_code)
 
 # 3. Add GitHub CI Badges to README
-with open('README.md', 'r', encoding='utf-8') as f: 
+with open("README.md", "r", encoding="utf-8") as f:
     readme = f.read()
 
 badge_markdown = "[![ForgeLoop CI](https://github.com/shambhushekharsinha-engg/ForgeLoop/actions/workflows/ci.yml/badge.svg)](https://github.com/shambhushekharsinha-engg/ForgeLoop/actions)\n"
 
 if badge_markdown not in readme:
-    with open('README.md', 'w', encoding='utf-8') as f:
+    with open("README.md", "w", encoding="utf-8") as f:
         f.write(badge_markdown + readme)
     print("Added CI badges to README.md")

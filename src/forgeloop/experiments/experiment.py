@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Optional, TYPE_CHECKING
-from ..decisions.proposal import AIProposal
-from ..decisions.decision import HumanDecision
-from .result import ExperimentResult
+from typing import TYPE_CHECKING
+
 from ..data.machine import BSGMachine
+from ..decisions.decision import HumanDecision
+from ..decisions.proposal import AIProposal
+from .result import ExperimentResult
+
 if TYPE_CHECKING:
     from ..data.trajectory import Trajectory
+
 
 @dataclass
 class Experiment:
@@ -16,8 +19,8 @@ class Experiment:
     hypothesis: str
     proposal: AIProposal
     human_decision: HumanDecision
-    machine_raw: Optional[BSGMachine] = None
-    machine_tuned: Optional[BSGMachine] = None
-    trajectory: Optional[Trajectory] = None
-    result: Optional[ExperimentResult] = None
+    machine_raw: BSGMachine | None = None
+    machine_tuned: BSGMachine | None = None
+    trajectory: Trajectory | None = None
+    result: ExperimentResult | None = None
     notes: str = ""
