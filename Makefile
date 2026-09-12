@@ -1,4 +1,4 @@
-.PHONY: help install test simulate dashboard verify package clean
+.PHONY: help install test simulate dashboard verify package submit clean
 
 help:
 	@echo "ForgeLoop Commands:"
@@ -8,6 +8,7 @@ help:
 	@echo "  make dashboard  - Export the static web dashboard to public/"
 	@echo "  make verify     - Run the pre-flight checklist for Kaggle artifacts"
 	@echo "  make package    - Package the submission artifacts into a zip file"
+	@echo "  make submit     - Package and print the Kaggle CLI upload command"
 	@echo "  make clean      - Remove generated caches, plots, and output files"
 
 install:
@@ -27,6 +28,13 @@ verify:
 
 package:
 	python scripts/create_submission.py
+
+submit: package
+	@echo "\n🚀 Ready for Kaggle!"
+	@echo "If you have the Kaggle CLI installed, run:"
+	@echo "kaggle competitions submit -c build-arena-human-ai-colleberation-engineering-challenge -f ForgeLoop_Submission.zip -m 'My ForgeLoop Submission'"
+	@echo "\nOtherwise, upload ForgeLoop_Submission.zip manually at:"
+	@echo "https://www.kaggle.com/competitions/build-arena-human-ai-colleberation-engineering-challenge/submissions"
 
 clean:
 	rm -rf .pytest_cache
