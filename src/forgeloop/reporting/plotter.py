@@ -39,15 +39,26 @@ class TrajectoryPlotter:
             if center.shape != (3,) or not np.isfinite(center).all():
                 raise ValueError("center must contain three finite coordinates")
 
-        fig = Figure(figsize=(10, 8))
+        import matplotlib.pyplot as plt
+        plt.style.use("dark_background")
+        
+        fig = Figure(figsize=(10, 8), facecolor="#0a0a0a")
         FigureCanvasAgg(fig)
         try:
             ax = fig.add_subplot(111, projection="3d")
+            ax.set_facecolor("#0a0a0a")
+            # Enhance axis grid
+            ax.grid(color='#333333', linestyle=':', linewidth=0.5)
+            ax.xaxis.set_pane_color((0.1, 0.1, 0.1, 1.0))
+            ax.yaxis.set_pane_color((0.1, 0.1, 0.1, 1.0))
+            ax.zaxis.set_pane_color((0.1, 0.1, 0.1, 1.0))
+            
             ax.plot(
                 *(coordinates[column] for column in ("x", "y", "z")),
                 label=f"Flight path ({experiment_id})",
-                color="teal",
-                linewidth=2,
+                color="cyan",
+                linewidth=2.5,
+                alpha=0.8
             )
             if center is not None:
                 ax.scatter(

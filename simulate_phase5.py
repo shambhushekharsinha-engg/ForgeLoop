@@ -10,8 +10,6 @@ from forgeloop.experiments.runner import ExperimentRunner
 
 
 def run_simulation():
-    print("ForgeLoop synthetic score example — no game flight or official score")
-
     # 1. Create AI Proposal
     proposal = AIProposal(
         id="AI-001",
@@ -53,25 +51,29 @@ def run_simulation():
         transcript=transcript_mock,
     )
 
-    # 5. Output Dashboard
-    print(f"\n+{'=' * 33}+")
-    print("| FORGELOOP EXPERIMENT            |")
-    print(f"+{'-' * 33}+")
-    print(f"| Experiment ID      {exp.id:<13}|")
-    print(f"| AI Proposal        {exp.proposal.id:<13}|")
-    print(f"| Decision           {exp.human_decision.status.value:<13}|")
-    print(f"+{'-' * 33}+")
-    print(f"| Orbit Progress       {result.orbit_progress * 100:4.1f}%      |")
-    print(f"| Speed Score          {result.speed_score * 100:4.1f}%      |")
-    print(f"| Integrity            {result.integrity * 100:4.1f}%      |")
-    print("|                                 |")
-    print(f"| Performance          {result.performance_score:5.1f}      |")
-    print(f"| Cost Penalty         {result.cost_penalty:7.4f}      |")
-    print(f"| Build Mode          {exp.build_mode:<12}|")
-    print("| Coefficient            1.15     |")
-    print(f"+{'-' * 33}+")
-    print(f"| PROJECTED SCORE       {result.final_score:5.1f}     |")
-    print(f"+{'=' * 33}+")
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.table import Table
+
+    console = Console()
+    console.print("[bold cyan]ForgeLoop synthetic score example — no game flight or official score[/bold cyan]\n")
+
+    table = Table(title="FORGELOOP EXPERIMENT", show_header=False, title_style="bold magenta", border_style="cyan")
+    table.add_row("Experiment ID", exp.id)
+    table.add_row("AI Proposal", exp.proposal.id)
+    table.add_row("Decision", exp.human_decision.status.value)
+    table.add_section()
+    table.add_row("Orbit Progress", f"[green]{result.orbit_progress*100:.1f}%[/green]")
+    table.add_row("Speed Score", f"[green]{result.speed_score*100:.1f}%[/green]")
+    table.add_row("Integrity", f"[green]{result.integrity*100:.1f}%[/green]")
+    table.add_row("Performance", f"[bold white]{result.performance_score:.1f}[/bold white]")
+    table.add_row("Cost Penalty", f"[red]{result.cost_penalty:.4f}[/red]")
+    table.add_row("Build Mode", exp.build_mode)
+    table.add_row("Coefficient", "1.15")
+    table.add_section()
+    table.add_row("[bold yellow]PROJECTED SCORE[/bold yellow]", f"[bold yellow]{result.final_score:.1f}[/bold yellow]")
+
+    console.print(Panel(table, border_style="blue", expand=False))
 
 
 if __name__ == "__main__":
