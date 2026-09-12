@@ -1,0 +1,567 @@
+{
+  "source": "https://raw.githubusercontent.com/build-arena/BuildArena-2.0/fc5ef3bd6be30a69bb7bc7b0c1f2b53ea794ddbc/blocks/block_roles.toml",
+  "revision": "fc5ef3bd6be30a69bb7bc7b0c1f2b53ea794ddbc",
+  "license": "CC-BY-NC-4.0",
+  "license_url": "https://github.com/build-arena/BuildArena-2.0/blob/fc5ef3bd6be30a69bb7bc7b0c1f2b53ea794ddbc/LICENSE",
+  "attribution": "BuildArena contributors; normalized from blocks/block_roles.toml",
+  "retrieved_at": "2026-09-12T15:03:58.453931+00:00",
+  "source_sha256": "7f79100a0da22fb439adc6c7b45bdd9f6ccadae4f99117f4c5cea9b5907b3303",
+  "limitations": "Names and roles only. Game assets, collider dumps, flight evidence and an LLM are not included.",
+  "blocks": [
+    {
+      "id": 0,
+      "name": "Starting Block",
+      "type": "basic"
+    },
+    {
+      "id": 1,
+      "name": "Double Wooden Block",
+      "type": "basic"
+    },
+    {
+      "id": 2,
+      "name": "Wheel",
+      "type": "basic"
+    },
+    {
+      "id": 3,
+      "name": "Metal Blade",
+      "type": "basic"
+    },
+    {
+      "id": 4,
+      "name": "Decoupler",
+      "type": "basic"
+    },
+    {
+      "id": 5,
+      "name": "Hinge",
+      "type": "basic"
+    },
+    {
+      "id": 6,
+      "name": "Metal Ball",
+      "type": "basic"
+    },
+    {
+      "id": 7,
+      "name": "Brace",
+      "type": "connection"
+    },
+    {
+      "id": 9,
+      "name": "Spring",
+      "type": "connection"
+    },
+    {
+      "id": 10,
+      "name": "Wooden Panel",
+      "type": "basic"
+    },
+    {
+      "id": 11,
+      "name": "Cannon",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Scaling Block",
+      "type": "basic"
+    },
+    {
+      "id": 13,
+      "name": "Steering Block",
+      "type": "basic"
+    },
+    {
+      "id": 14,
+      "name": "Flying Block",
+      "type": "basic"
+    },
+    {
+      "id": 15,
+      "name": "Single Wooden Block",
+      "type": "basic"
+    },
+    {
+      "id": 16,
+      "name": "Suspension",
+      "type": "basic"
+    },
+    {
+      "id": 17,
+      "name": "Circular Saw",
+      "type": "basic"
+    },
+    {
+      "id": 18,
+      "name": "Piston",
+      "type": "basic"
+    },
+    {
+      "id": 19,
+      "name": "Swivel",
+      "type": "basic"
+    },
+    {
+      "id": 20,
+      "name": "Spike",
+      "type": "basic"
+    },
+    {
+      "id": 21,
+      "name": "Flamethrower",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Spinning Block",
+      "type": "basic"
+    },
+    {
+      "id": 23,
+      "name": "Bomb",
+      "type": "basic"
+    },
+    {
+      "id": 24,
+      "name": "Armor Plate Small",
+      "type": "basic"
+    },
+    {
+      "id": 25,
+      "name": "Wing",
+      "type": "basic"
+    },
+    {
+      "id": 26,
+      "name": "Propeller",
+      "type": "basic"
+    },
+    {
+      "id": 27,
+      "name": "Grabber",
+      "type": "basic"
+    },
+    {
+      "id": 28,
+      "name": "Steering Hinge",
+      "type": "basic"
+    },
+    {
+      "id": 29,
+      "name": "Armor Plate Round",
+      "type": "basic"
+    },
+    {
+      "id": 30,
+      "name": "Bomb Holder",
+      "type": "basic"
+    },
+    {
+      "id": 31,
+      "name": "Flame Ball",
+      "type": "basic"
+    },
+    {
+      "id": 32,
+      "name": "Armor Plate Large",
+      "type": "basic"
+    },
+    {
+      "id": 33,
+      "name": "Plow",
+      "type": "basic"
+    },
+    {
+      "id": 34,
+      "name": "Wing Panel",
+      "type": "basic"
+    },
+    {
+      "id": 35,
+      "name": "Ballast",
+      "type": "basic"
+    },
+    {
+      "id": 36,
+      "name": "Boulder",
+      "type": "basic"
+    },
+    {
+      "id": 37,
+      "name": "Half Pipe",
+      "type": "basic"
+    },
+    {
+      "id": 38,
+      "name": "Cog Medium Unpowered",
+      "type": "basic"
+    },
+    {
+      "id": 39,
+      "name": "Cog Medium Powered",
+      "type": "basic"
+    },
+    {
+      "id": 40,
+      "name": "Wheel Unpowered",
+      "type": "basic"
+    },
+    {
+      "id": 41,
+      "name": "Wooden Pole",
+      "type": "basic"
+    },
+    {
+      "id": 42,
+      "name": "Slider",
+      "type": "basic"
+    },
+    {
+      "id": 43,
+      "name": "Balloon",
+      "type": "basic"
+    },
+    {
+      "id": 44,
+      "name": "Ball Joint",
+      "type": "basic"
+    },
+    {
+      "id": 45,
+      "name": "Rope Winch",
+      "type": "connection"
+    },
+    {
+      "id": 46,
+      "name": "Large Wheel",
+      "type": "basic"
+    },
+    {
+      "id": 47,
+      "name": "Torch",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Drill",
+      "type": "basic"
+    },
+    {
+      "id": 49,
+      "name": "Grip Pad",
+      "type": "basic"
+    },
+    {
+      "id": 50,
+      "name": "Small Wheel",
+      "type": "basic"
+    },
+    {
+      "id": 51,
+      "name": "Cog Large Unpowered",
+      "type": "basic"
+    },
+    {
+      "id": 53,
+      "name": "Shrapnel Cannon",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Grenade",
+      "type": "basic"
+    },
+    {
+      "id": 55,
+      "name": "Small Propeller",
+      "type": "basic"
+    },
+    {
+      "id": 56,
+      "name": "Water Cannon",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 57,
+      "name": "Pin",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 58,
+      "name": "Camera Block",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 59,
+      "name": "Rocket",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 60,
+      "name": "Large Wheel Unpowered",
+      "type": "basic"
+    },
+    {
+      "id": 61,
+      "name": "Crossbow",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 62,
+      "name": "Vacuum",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 63,
+      "name": "Log",
+      "type": "basic"
+    },
+    {
+      "id": 65,
+      "name": "Sensor",
+      "type": "basic"
+    },
+    {
+      "id": 66,
+      "name": "Timer",
+      "type": "basic"
+    },
+    {
+      "id": 67,
+      "name": "Altimeter",
+      "type": "basic"
+    },
+    {
+      "id": 68,
+      "name": "Logic Gate",
+      "type": "basic"
+    },
+    {
+      "id": 69,
+      "name": "Anglometer",
+      "type": "basic"
+    },
+    {
+      "id": 70,
+      "name": "Speedometer",
+      "type": "basic"
+    },
+    {
+      "id": 74,
+      "name": "Sqr Balloon",
+      "type": "basic"
+    },
+    {
+      "id": 75,
+      "name": "Rope Measure",
+      "type": "connection"
+    },
+    {
+      "id": 76,
+      "name": "Axle",
+      "type": "basic"
+    },
+    {
+      "id": 77,
+      "name": "Metal Jaw",
+      "type": "basic"
+    },
+    {
+      "id": 78,
+      "name": "Sail",
+      "type": "basic"
+    },
+    {
+      "id": 79,
+      "name": "Rudder",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 80,
+      "name": "Nautical Screw",
+      "type": "basic"
+    },
+    {
+      "id": 81,
+      "name": "Paddle",
+      "type": "basic"
+    },
+    {
+      "id": 82,
+      "name": "Buoyancy",
+      "type": "basic"
+    },
+    {
+      "id": 83,
+      "name": "Big Barrel",
+      "type": "basic"
+    },
+    {
+      "id": 84,
+      "name": "Harpoon",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 85,
+      "name": "Corner Wooden Block",
+      "type": "basic"
+    },
+    {
+      "id": 86,
+      "name": "Skate Wheel",
+      "type": "basic"
+    },
+    {
+      "id": 87,
+      "name": "Bouncy Pad",
+      "type": "basic"
+    },
+    {
+      "id": 88,
+      "name": "Fly Wheel",
+      "type": "basic"
+    },
+    {
+      "id": 89,
+      "name": "Drag Block",
+      "type": "basic"
+    },
+    {
+      "id": 90,
+      "name": "Booster",
+      "type": "basic"
+    },
+    {
+      "id": 91,
+      "name": "Steering Thruster",
+      "type": "basic"
+    },
+    {
+      "id": 92,
+      "name": "Fuel Barrel",
+      "type": "basic"
+    },
+    {
+      "id": 93,
+      "name": "Fuel Gauge",
+      "type": "basic"
+    },
+    {
+      "id": 94,
+      "name": "Grid Fin",
+      "type": "basic"
+    },
+    {
+      "id": 95,
+      "name": "Steering Fin",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "id": 96,
+      "name": "Fuel Line",
+      "type": "connection"
+    },
+    {
+      "id": 97,
+      "name": "Parachute",
+      "type": "basic"
+    },
+    {
+      "id": 98,
+      "name": "Fuel Coupler",
+      "type": "basic"
+    },
+    {
+      "id": 99,
+      "name": "Fuel Barrel Big",
+      "type": "basic"
+    },
+    {
+      "id": 100,
+      "name": "Space Wheel",
+      "type": "basic"
+    },
+    {
+      "id": 101,
+      "name": "Reaction Steering Block",
+      "type": "basic"
+    },
+    {
+      "id": 102,
+      "name": "Fuel Cannon",
+      "type": "pointer",
+      "pointer_axis": [
+        0,
+        0,
+        1
+      ]
+    }
+  ]
+}

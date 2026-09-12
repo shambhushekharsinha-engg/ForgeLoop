@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ForgeLoop-AI | BuildArena S01 Submission</title>
+        <title>ForgeLoop-AI | Local Experiment Dashboard</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
@@ -55,22 +55,22 @@
                             ForgeLoop<span class="text-cyan-500">.AI</span>
                         </h1>
                         <div class="flex items-center gap-4 mb-6">
-                            <p class="text-xl text-cyan-400 tracking-[0.2em] uppercase font-bold">BuildArena S01 Official Submission</p>
+                            <p class="text-xl text-cyan-400 tracking-[0.2em] uppercase font-bold">Local experiment workspace</p>
                             <img src="https://github.com/shambhushekharsinha-engg/ForgeLoop/actions/workflows/ci.yml/badge.svg" alt="CI Status" class="rounded shadow-[0_0_10px_rgba(0,240,255,0.3)]">
                         </div>
-                        <p class="text-gray-400 leading-relaxed text-lg">An advanced, auditable Human-AI Collaboration framework orchestrating the Besiege MCP. Featuring automated trajectory grading, mathematically optimized token scrubbing, and Autopilot prompt extraction for maximum Kaggle scoring.</p>
+                        <p class="text-gray-400 leading-relaxed text-lg">Local tools for reviewing Besiege experiments, estimating trajectory scores, and recording human decisions. This snapshot does not connect to the game or an AI provider.</p>
                     </div>
                     
                     <div class="mt-8 md:mt-0 flex flex-col gap-4 w-full md:w-auto">
                         <a href="#dashboard" class="btn-cyber text-white font-black py-4 px-8 rounded-lg tracking-widest uppercase text-sm border border-cyan-400/50 flex justify-center items-center gap-2 text-center">
-                            <span class="w-2 h-2 bg-white rounded-full animate-pulse-glow"></span> View Live Telemetry
+                            <span class="w-2 h-2 bg-white rounded-full animate-pulse-glow"></span> View Local Results
                         </a>
                         <div class="flex gap-4">
                             <a href="#reproduce" class="flex-1 text-center bg-gray-900 hover:bg-gray-800 border border-gray-700 text-white font-bold py-3 px-6 rounded-lg tracking-widest text-xs uppercase transition-colors">
-                                Run Physics Sim
+                                Run Local Demo
                             </a>
                             <a href="#gallery" class="flex-1 text-center btn-alert text-white font-bold py-3 px-6 rounded-lg tracking-widest text-xs uppercase border border-red-500/50">
-                                View Schematics
+                                View Plots
                             </a>
                         </div>
                     </div>
@@ -80,31 +80,11 @@
             <!-- Whitepaper -->
             <section id="whitepaper" class="glass rounded-3xl p-10 mb-12 border-t border-cyan-900/50 relative overflow-hidden shadow-2xl">
                 <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-                <h2 class="text-4xl font-black mb-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 uppercase tracking-widest border-b border-gray-800 pb-4">Technical Whitepaper: Solving the Challenge</h2>
+                <h2 class="text-4xl font-black mb-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 uppercase tracking-widest border-b border-gray-800 pb-4">Project Scope</h2>
                 <div class="space-y-10 text-gray-300 leading-relaxed text-lg">
-                    <div>
-                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><span class="text-red-500 text-3xl">⚠</span> The Core Problem: Physics Hallucination</h3>
-                        <p>The defining challenge of the BuildArena S01 hackathon is that State-of-the-Art Large Language Models lack innate spatial awareness and physics intuition. When tasked to build an orbital spacecraft through the MCP, standard LLMs invariably generate chaotic, unsymmetrical geometry. These naive structural configurations instantly rip apart under aerodynamic stress or spin out of control due to unbalanced thrust. A simple "zero-shot prompt" approach mathematically guarantees failure in the Broken Beyond sandbox.</p>
-                    </div>
-                    <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><span class="text-green-500 text-3xl">✓</span> The ForgeLoop Solution: Orchestrated Iteration</h3>
-                        <p>To solve this, we stopped treating AI as a "magic black box" and started treating it as an engineering sub-contractor. We developed the <strong>ForgeLoop Experiment Engine</strong>. Rather than blindly accepting generations, we use a human-in-the-loop <em>Decision Ledger</em> to test isolated structural hypotheses (e.g., <em>"Shift Center of Mass downward"</em>, <em>"Add Aerodynamic Shielding to the nose"</em>). We explicitly <code>ACCEPT</code> or <code>REJECT</code> the AI's proposed XML payloads, maintaining a rigorous, auditable engineering trail that leads to aerodynamic perfection.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                        <div class="bg-black/60 p-8 rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-colors shadow-lg">
-                            <h4 class="text-cyan-400 font-bold text-2xl mb-4">Breakthrough 1: Local Kaggle Math</h4>
-                            <p class="text-sm leading-relaxed text-gray-400">We implemented a localized evaluation engine utilizing <code>pandas</code> and <code>numpy</code>. By parsing the game's <code>trajectory.csv</code> telemetry output, ForgeLoop instantly calculates our own <strong>Orbit Progress (70%)</strong>, <strong>Speed Score (20%)</strong>, and <strong>Structure Integrity (10%)</strong> locally. This ensures we never waste a submission on a mathematically inferior design.</p>
-                        </div>
-                        <div class="bg-black/60 p-8 rounded-2xl border border-gray-800 hover:border-purple-500/50 transition-colors shadow-lg">
-                            <h4 class="text-purple-400 font-bold text-2xl mb-4">Breakthrough 2: The Token Scrubber</h4>
-                            <p class="text-sm leading-relaxed text-gray-400">Kaggle applies a severe <code>CostPenalty</code> based on token length, but explicitly allows excluding generated structural payloads. We built a custom Regex Scrubber that intercepts our <code>chat_transcript.md</code> and automatically strips massive JSON/XML blocks before submission. This mathematically minimizes our token footprint and artificially maximizes our Final Score.</p>
-                        </div>
-                        <div class="bg-black/60 p-8 rounded-2xl border border-gray-800 hover:border-yellow-500/50 transition-colors shadow-lg md:col-span-2">
-                            <h4 class="text-yellow-400 font-bold text-2xl mb-4">Breakthrough 3: The Autopilot Mega-Prompt</h4>
-                            <p class="text-sm leading-relaxed text-gray-400">The competition offers a massive <code>x1.15</code> multiplier for final submissions done entirely in "Autopilot" (zero-shot) mode. Once our Copilot iteration discovers the perfect orbital staging pattern, the <code>AutopilotCompiler</code> module distills the human's successful decisions into one highly dense, token-efficient mega-prompt. We run this prompt as our final build, claiming the massive 1.15x multiplier.</p>
-                        </div>
-                    </div>
+                    <p>ForgeLoop records engineering proposals and human decisions, estimates trajectory scores, and prepares draft reports for Besiege experiments.</p>
+                    <p>No API key is required for local analysis or synthetic demonstrations. Building and flying a real machine requires the game and compatible tools. No AI provider or game connection is implemented here.</p>
+                    <p>Scores are local estimates. Synthetic trajectories do not establish real flight performance. Verify scoring rules, transcript exclusions, and Autopilot eligibility against the competition rules.</p>
                 </div>
             </section>
 
@@ -115,43 +95,23 @@
                     <span class="text-purple-500">▶</span> Flight Demonstration
                 </h2>
                 <div class="aspect-video bg-black rounded-xl border border-gray-800 flex items-center justify-center p-2 shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-                    <!-- YouTube iframe placeholder (Awaiting official recording) -->
-                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=1" title="BuildArena Flight Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <p class="text-gray-400">No verified flight recording has been supplied.</p>
                 </div>
-                <p class="mt-5 text-gray-400 text-sm">Official BuildArena S01 Flight Recording. Showcasing the ForgeLoop Autopilot geometry achieving a perfectly stable orbit inside the Broken Beyond sandbox.</p>
+                <p class="mt-5 text-gray-400 text-sm">Attach evidence from the actual in-game run before presenting flight results.</p>
             </section>
 
             <!-- Gallery -->
             <section id="gallery" class="mb-16">
                 <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest flex items-center gap-3">
-                    <span class="text-cyan-500">📐</span> Spacecraft Blueprints
+                    <span class="text-cyan-500">📐</span> Local Trajectory Plots
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="glass rounded-xl overflow-hidden border border-gray-800 group relative aspect-[4/3]">
-                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
-                            <p class="text-cyan-400 font-mono text-sm">RENDER: ORBITAL INSERTION</p>
-                        </div>
-                    </div>
-                    <div class="glass rounded-xl overflow-hidden border border-gray-800 group relative aspect-[4/3]">
-                        <img src="plots/SIM-001_orbit.png" onerror="this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-contain mix-blend-screen opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
-                            <p class="text-purple-400 font-mono text-sm">DATA: TRAJECTORY.CSV PLOT</p>
-                        </div>
-                    </div>
-                    <div class="glass rounded-xl overflow-hidden border border-gray-800 group relative aspect-[4/3]">
-                        <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
-                            <p class="text-green-400 font-mono text-sm">SCHEMATIC: QUAD-SYMMETRY</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-gray-400">Generated plots are saved to docs/plots. Synthetic demo plots are not evidence of in-game flight.</p>
             </section>
 
             <!-- Dashboard -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12" id="dashboard">
                 <section class="lg:col-span-8 glass rounded-3xl p-8 neon-border relative overflow-hidden">
-                    <h2 class="text-2xl font-bold mb-6 text-white uppercase tracking-widest">Global Experiment Ledger</h2>
+                    <h2 class="text-2xl font-bold mb-6 text-white uppercase tracking-widest">Local Experiment Ledger</h2>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>
@@ -166,44 +126,21 @@
                                 </tr>
                             </thead>
                             <tbody class="text-xs font-mono">
-                                <tr class="border-b border-cyan-900/30 bg-cyan-950/10 hover:bg-white/5 transition-colors">
-                                    <td class="py-4 px-2 font-black text-yellow-400 text-base">#1</td>
-                                    <td class="py-4 px-2 text-gray-300">EXP-142</td>
-                                    <td class="py-4 px-2 text-gray-400 truncate max-w-[150px]">Compiled Megaprompt...</td>
-                                    <td class="py-4 px-2"><span class="bg-blue-900/50 border border-blue-500/30 text-blue-300 px-2 py-0.5 rounded-full text-[10px]">Autopilot</span></td>
-                                    <td class="py-4 px-2 text-right text-white">99.8%</td>
-                                    <td class="py-4 px-2 text-right text-magenta">-0.2</td>
-                                    <td class="py-4 px-2 font-black text-green-400 text-xl text-right">114.7</td>
-                                </tr>
-                                <tr class="border-b border-gray-800 hover:bg-white/5 transition-colors">
-                                    <td class="py-4 px-2 font-bold text-gray-400">#2</td>
-                                    <td class="py-4 px-2 text-gray-400">EXP-138</td>
-                                    <td class="py-4 px-2 text-gray-500 truncate max-w-[150px]">COM shift down</td>
-                                    <td class="py-4 px-2"><span class="bg-gray-800/80 border border-gray-600/50 text-gray-300 px-2 py-0.5 rounded-full text-[10px]">Copilot</span></td>
-                                    <td class="py-4 px-2 text-right">98.5%</td>
-                                    <td class="py-4 px-2 text-right text-magenta">-1.5</td>
-                                    <td class="py-4 px-2 font-bold text-green-500 text-right text-lg">98.1</td>
-                                </tr>
+                                <tr><td colspan="7" class="py-4 px-2">No evaluated experiments supplied.</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </section>
 
                 <section class="lg:col-span-4 glass rounded-3xl p-6 border border-gray-800 flex flex-col">
-                    <h2 class="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">🖥️ MCP Terminal Stream</h2>
+                    <h2 class="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">Snapshot Status</h2>
                     <div class="bg-[#050505] rounded-xl p-4 flex-1 overflow-hidden relative border border-gray-900 font-mono text-[10px] leading-relaxed shadow-inner">
                         <div class="absolute top-0 left-0 w-full h-8 bg-gradient-to-b from-[#050505] to-transparent z-10"></div>
-                        <div class="animate-terminal text-green-500/80 whitespace-nowrap">
-                            > BOOT: ForgeLoop v2.0<br>
-                            > Connecting MCP... [OK]<br>
-                            > Fetching collider... [OK]<br>
-                            <span class="text-yellow-500">> AI Proposal AI-142 Received.</span><br>
-                            <span class="text-cyan-400">> Human Decision: ACCEPT</span><br>
-                            > RUNNING TOKEN SCRUBBER...<br>
-                            <span class="text-purple-400">> Stripped 14,203 tokens.</span><br>
-                            > Mode: x1.15 (AUTOPILOT)<br>
-                            <span class="text-green-400 font-bold">> FINAL SCORE: 114.7</span><br>
-                            > Zipping submission files...<br>
+                        <div class="text-green-500/80">
+                            Static local export.<br>
+                            No live MCP connection.<br>
+                            Results are local estimates.<br>
+                            Synthetic data is for demonstration only.
                         </div>
                     </div>
                 </section>
@@ -212,16 +149,16 @@
             <!-- Reproducibility -->
             <section id="reproduce" class="glass rounded-3xl p-10 mb-12 border-t border-green-900/50 relative overflow-hidden">
                 <h2 class="text-3xl font-black mb-6 text-white uppercase tracking-widest">How to Reproduce</h2>
-                <p class="text-gray-400 mb-6">ForgeLoop-AI is built to be mathematically reproducible. Judges can run our local evaluator and physics simulator directly from the CLI to verify our scoring calculations.</p>
+                <p class="text-gray-400 mb-6">Run the offline synthetic telemetry demo to exercise local analysis. Real game performance must be measured separately.</p>
                 <div class="bg-black/80 rounded-lg p-6 font-mono text-sm text-cyan-400 border border-gray-800 shadow-inner">
                     $ git clone https://github.com/shambhushekharsinha-engg/ForgeLoop<br>
                     $ cd ForgeLoop<br>
                     $ pip install -e .<br>
                     <br>
-                    <span class="text-gray-500"># Run the offline physics simulator & plot trajectories</span><br>
-                    <span class="text-white">$</span> python showcase.py<br>
+                    <span class="text-gray-500"># Generate synthetic telemetry and plot trajectories</span><br>
+                    <span class="text-white">$</span> python simulate_phase5.py<br>
                     <br>
-                    <span class="text-gray-500"># Run the automated Kaggle Zip Packager</span><br>
+                    <span class="text-gray-500"># Package genuine run artifacts from submissions/latest</span><br>
                     <span class="text-white">$</span> python -c "from forgeloop.cli.packager import SubmissionPackager; SubmissionPackager().package()"
                 </div>
             </section>
@@ -235,8 +172,8 @@
                     </div>
                     <div class="text-center md:text-left">
                         <h3 class="text-3xl font-bold text-white mb-2">Shambhu Shekhar Sinha</h3>
-                        <p class="text-cyan-400 font-mono tracking-widest">Lead AI Aerospace Engineer</p>
-                        <p class="text-gray-500 text-sm mt-2 max-w-md">Responsible for orchestrating the AI's geometry generation, enforcing structural boundaries, and executing final orbital flights.</p>
+                        <p class="text-cyan-400 font-mono tracking-widest">Project author</p>
+                        <p class="text-gray-500 text-sm mt-2 max-w-md">Repository author. Add verified build history and flight recordings as experiments are completed.</p>
                     </div>
                 </div>
             </section>

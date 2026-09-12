@@ -27,11 +27,25 @@ def test_experiment_runner_attaches_results():
     exp = Experiment(id="EXP-001", build_mode="Autopilot", hypothesis="Test", proposal=prop, human_decision=dec)
     
     runner = ExperimentRunner()
-    # Provide synthetic flight telemetry and a transcript of 500 chars (penalty = 5.0 in our stub)
+    # Provide synthetic flight telemetry and an offline transcript cost estimate.
     result = runner.evaluate_experiment(exp, orbit=0.5, speed=0.5, integrity=1.0, transcript="A"*500)
     
     assert exp.result is not None
     # Perf = 100 * (0.7*0.5 + 0.2*0.5 + 0.1*1.0) = 55.0
-    # Cost = 5.0. Base = 55 - (0.2 * 5) = 54.0. Autopilot = 54.0 * 1.15 = 62.1
+    # 500 ASCII bytes estimate 125 tokens, a local penalty of 0.0125.
     assert exp.result.performance_score == pytest.approx(55.0)
-    assert exp.result.final_score == pytest.approx(62.1)
+    assert exp.result.final_score == pytest.approx((55 - 0.2 * 0.0125) * 1.15)
+
+
+def test_registry_does_not_overwrite_or_reuse_sparse_ids():
+    from types import SimpleNamespace
+    from forgeloop.experiments.registry import ExperimentRegistry
+    registry = ExperimentRegistry()
+    experiment = SimpleNamespace(id="EXP-002")
+    registry.register(experiment)
+    assert registry.get_next_id() == "EXP-003"
+    with pytest.raises(ValueError):
+        registry.register(SimpleNamespace(id="EXP-002"))
+    assert registry.experiments['EXP-002'] is experiment
+    registry.register(SimpleNamespace(id="SIM-999"))
+    assert registry.get_next_id() == "EXP-003"

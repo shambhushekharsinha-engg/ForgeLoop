@@ -1,3 +1,5 @@
+> Historical design notes: claims below are not implementation or eligibility guarantees. See [current project status](PROJECT_STATUS.md) and the organizer rules.
+
 # BuildArena Construction Challenge S01: To Infinity, and Beyond.
 
 ## Objective

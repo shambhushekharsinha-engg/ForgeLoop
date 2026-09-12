@@ -1,3 +1,6 @@
+from .tokenizer import TokenAnalyzer
+
+
 def estimate_token_cost(transcript_text: str) -> float:
-    # Stub: returns length / 100 as dummy token cost for phase 5 validation
-    return len(transcript_text) / 100.0
+    """Offline local penalty estimate; not an official competition cost."""
+    return TokenAnalyzer().calculate_penalty(transcript_text)["cost_penalty"]

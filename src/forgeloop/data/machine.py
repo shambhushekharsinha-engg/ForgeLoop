@@ -7,4 +7,5 @@ class BSGMachine:
     is_raw: bool
 
     def validate_exists(self) -> bool:
-        return self.filepath.exists()
+        path = Path(self.filepath)
+        return path.is_file() and path.stat().st_size > 0

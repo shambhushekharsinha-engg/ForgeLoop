@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from ..decisions.proposal import AIProposal
 from ..decisions.decision import HumanDecision
 from .result import ExperimentResult
 from ..data.machine import BSGMachine
-from ..data.trajectory import Trajectory
+if TYPE_CHECKING:
+    from ..data.trajectory import Trajectory
 
 @dataclass
 class Experiment:

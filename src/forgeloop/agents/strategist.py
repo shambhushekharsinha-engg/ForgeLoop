@@ -1,37 +1,48 @@
-import pandas as pd
+"""Descriptive telemetry summaries and explicitly unverified test hypotheses."""
+
+import math
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pandas as pd
+
 
 class TelemetryStrategist:
-    """
-    An autonomous agent module that reads the failed flight telemetry 
-    and mathematically diagnoses the aerodynamic flaw to generate the next prompt.
-    """
-    def analyze_flight(self, trajectory_df: pd.DataFrame) -> str:
-        if trajectory_df.empty: 
+    def analyze_flight(self, trajectory_df: "pd.DataFrame") -> str:
+        if trajectory_df.empty:
             return "[STRATEGIST] No telemetry data available."
-        
-        max_z = trajectory_df['z'].max()
-        final_z = trajectory_df['z'].iloc[-1]
-        max_ang = trajectory_df['angular_progress'].max()
-        vz_std = trajectory_df['vz'].std()
-        
-        recommendations = ["[STRATEGIST DIAGNOSTICS]"]
-        
-        # Detect Altitude Loss
-        if final_z < max_z * 0.5:
-            recommendations.append("❌ CRITICAL: Severe altitude loss detected.")
-            recommendations.append("   -> PROMPT INJECTION: 'Add ventral staging thrusters to maintain Z-axis elevation.'")
-            
-        # Detect Sub-Orbital Speed
-        if max_ang < 360:
-            recommendations.append("❌ WARNING: Orbital insertion failed (Sub 1-period).")
-            recommendations.append("   -> PROMPT INJECTION: 'Increase primary forward thrust blocks and reduce drag.'")
-            
-        # Detect Tumbling / Unbalanced Mass
-        if vz_std > 20:
-            recommendations.append("❌ WARNING: Y/Z axis tumbling detected (Unstable Center of Mass).")
-            recommendations.append("   -> PROMPT INJECTION: 'Add aerodynamic shielding and reaction wheels to stabilize rotational torque.'")
-            
-        if len(recommendations) == 1:
-            return "[STRATEGIST] SUCCESS: Flight envelope is perfectly stable. Transition to Autopilot compiler."
-            
-        return "\n".join(recommendations)
+
+        required = ('z', 'angular_progress', 'vz')
+        missing = [field for field in required if field not in trajectory_df.columns]
+        if missing:
+            return f"[STRATEGIST] Missing telemetry fields: {', '.join(missing)}."
+        values = {}
+        for field in required:
+            try:
+                column = [float(value) for value in trajectory_df[field]]
+            except (TypeError, ValueError):
+                return f"[STRATEGIST] Invalid telemetry: {field} must contain finite numbers."
+            if not all(math.isfinite(value) for value in column):
+                return f"[STRATEGIST] Invalid telemetry: {field} must contain finite numbers."
+            values[field] = column
+
+        z, angles, vz = (values[field] for field in required)
+        mean_vz = sum(vz) / len(vz)
+        spread_vz = math.sqrt(sum((value - mean_vz) ** 2 for value in vz) / len(vz))
+        lines = [
+            '[STRATEGIST OBSERVATIONS]',
+            f'Samples: {len(z)}.',
+            f'Z coordinate: min {min(z):.3f}, max {max(z):.3f}, final {z[-1]:.3f}.',
+            f'Angular progress change (last minus first): {angles[-1] - angles[0]:.3f}.',
+            f'Vz population standard deviation: {spread_vz:.3f} (recorded units).',
+            'Coordinate frame and angular units must be confirmed before interpreting these measurements.',
+            'These measurements alone do not establish altitude, tumbling, orbital insertion, or stability.',
+        ]
+        if len(z) < 2:
+            lines.append('Only one sample: flight trends cannot be assessed.')
+        else:
+            lines.append(
+                'Hypothesis for investigation: compare changes in position and velocity with '
+                'control inputs and orientation telemetry before changing propulsion or mass distribution.'
+            )
+        return '\n'.join(lines)

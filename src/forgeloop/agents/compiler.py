@@ -1,16 +1,32 @@
+import math
+
 from ..experiments.experiment import Experiment
+from ..decisions.decision import DecisionStatus
 
 class AutopilotCompiler:
     def compile_megaprompt(self, successful_experiment: Experiment) -> str:
-        """Compresses a successful human-guided Copilot session into a dense Autopilot system prompt."""
-        strategy = successful_experiment.proposal.strategy
+        """Prepare a candidate prompt from a reviewed, evaluated experiment.
+
+        The caller selects the experiment; this does not certify success or eligibility.
+        """
+        decision = successful_experiment.human_decision
+        if decision.status not in (DecisionStatus.ACCEPT, DecisionStatus.MODIFY):
+            raise ValueError("A rejected or unreviewed experiment cannot be compiled")
+        result = successful_experiment.result
+        if result is None or not math.isfinite(result.final_score):
+            raise ValueError("An evaluated experiment with a finite result is required")
+        strategy = (decision.modified_strategy if decision.status == DecisionStatus.MODIFY
+                    else successful_experiment.proposal.strategy)
+        if not isinstance(strategy, str) or not strategy.strip():
+            raise ValueError("An approved strategy is required; MODIFY needs modified_strategy")
         
         mega_prompt = f"""[SYSTEM]
 ROLE: Expert Aerospace AI (BuildArena S01)
 OBJECTIVE: Construct a Besiege machine for stable orbital flight.
-CONSTRAINTS: Token efficiency is paramount. No conversational filler.
+CONSTRAINTS: Preserve complete build history and conversation evidence.
+STATUS: Candidate prompt only. Flight success and competition eligibility require verification.
 
-APPROVED STRATEGY (Derived from {successful_experiment.id}):
+REVIEWED STRATEGY (Derived from {successful_experiment.id}):
 {strategy}
 
 EXECUTION:

@@ -1,46 +1,60 @@
+import re
+from pathlib import Path
+
 from ..experiments.experiment import Experiment
+
 
 class WriteupGenerator:
     def __init__(self, output_path="docs/KAGGLE_WRITEUP.md"):
         self.output_path = output_path
-        
+
     def generate(self, machine_name: str, best_exp: Experiment, megaprompt: str):
-        """Auto-generates the mandatory Kaggle Writeup template."""
-        
+        """Write an evidence-based draft; unknown run details remain explicit."""
+        score = best_exp.result.performance_score if best_exp.result else "Not evaluated"
+        fence = "`" * max(3, max((len(part) for part in re.findall(r"`+", megaprompt)), default=0) + 1)
         template = f"""# {machine_name}
 
 ## Track
-- Build with Agent
-- {best_exp.build_mode}
+- Intended track: Build with Agent
+- Recorded build mode: {best_exp.build_mode}
+- Eligibility: verify against the current competition rules and actual run history.
 
 ## Run Summary
-The spacecraft achieved a projected orbital performance score of {best_exp.result.performance_score if best_exp.result else 'N/A'}. 
-Our ForgeLoop-AI system evaluated hypothesis: "{best_exp.hypothesis}".
-The machine remained structurally stable and hit high orbital velocities using legal human control tuning.
+- Experiment: {best_exp.id}
+- Hypothesis: {best_exp.hypothesis}
+- Local estimated performance score: {score}
+- Notes: {best_exp.notes or 'No run evidence recorded.'}
+
+Local scores and synthetic telemetry do not establish in-game flight performance.
+Attach real flight evidence before making stability or orbit claims.
 
 ## Video
-[INSERT YOUTUBE LINK HERE]
+[ADD THE ACTUAL FLIGHT RECORDING LINK]
 
 ## LLM / Agent Setup
-- **LLM or model family used:** Gemini 3.1 Pro (via ForgeLoop-AI)
-- **How it was used:** IDE agent orchestrating the BuildArena 2.0 MCP
-- **Single-agent or multi-agent:** Multi-agent (Copilot explorer -> Autopilot compiler)
-- **Visual feedback used:** no
+- Model and provider: [RECORD WHAT WAS ACTUALLY USED]
+- Agent tools and game integration: [RECORD WHAT WAS ACTUALLY USED]
+- Single-agent or multi-agent: [RECORD THE ACTUAL WORKFLOW]
+- Visual feedback: [RECORD WHETHER IT WAS USED]
 
 ## Prompts and Workflow
-- **Agent system prompt:**
-```text
+Candidate prompt (not evidence of an executed run):
+{fence}text
 {megaprompt}
-```
-- **Human initial prompt:** "Execute ForgeLoop strategy: finalize quad-symmetry and stage 1 thrusters."
-- **For Copilot/Autopilot:** Used Copilot for local iteration, extracted the successful decisions via our Decision Ledger, and executed the final run as Autopilot for the 1.15x multiplier.
+{fence}
+
+Document the actual initial prompt, human interventions, and build history.
+Compiling a prompt from a Copilot experiment does not establish Autopilot eligibility.
 
 ## Code and Tools
 Repository: https://github.com/shambhushekharsinha-engg/ForgeLoop
 
 ## Notes
-The ForgeLoop architecture mathematically minimized our Cost Penalty by using an automated regex Transcript Scrubber to strip verbose JSON/XML payloads before submission, perfectly aligning with Kaggle's token evaluation rules.
+Preserve the complete original transcript. Verify allowed token exclusions against
+the current competition rules before producing any derived counting copy.
 """
-        with open(self.output_path, 'w', encoding='utf-8') as f:
-            f.write(template)
-        print(f"[SUCCESS] Kaggle Writeup generated at {self.output_path}")
+        output_path = Path(self.output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(template, encoding="utf-8")
+        print(f"[SUCCESS] Writeup draft generated at {output_path}")
+        return output_path

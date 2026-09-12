@@ -4,17 +4,27 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "forgeloop"
-version = "0.1.0"
-description = "Human-AI Collaboration Engineering Challenge solution"
+version = "0.3.0"
+description = "Local experiment tools for the BuildArena engineering challenge"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = [
-    "pandas",
-    "numpy",
-    "scikit-learn",
-    "jupyter",
-    "pytest"
-]
+dependencies = ["tomli>=2; python_version < '3.11'"]
+
+[project.optional-dependencies]
+analysis = ["pandas>=2", "numpy>=1.24", "matplotlib>=3.7", "rich>=13"]
+tokens = ["tiktoken>=0.7"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+forgeloop = "forgeloop.cli.main:main"
+forgeloop-catalog = "forgeloop.cli.catalog:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+forgeloop = ["resources/*.json", "resources/*.txt"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
